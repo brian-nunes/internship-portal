@@ -1,0 +1,161 @@
+services:
+  zipkin:
+    container_name: zipkin
+    image: openzipkin/zipkin
+    ports:
+      - '9411:9411'
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "-v", "localhost", "9411" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - system_network
+
+  user-postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=user_db'
+      - 'POSTGRES_PASSWORD=svc_user_pwd'
+      - 'POSTGRES_USER=svc_user_user'
+    ports:
+      - '5432'
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "svc_user_user", "-d", "user_db", "-h", "localhost", "-p", "5432" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - postgres_data:/var/lib/postgresql/user/data
+    networks:
+      - system_network
+
+  redis-container:
+    image: 'redis:latest'
+    ports:
+      - '6379'
+    environment:
+      - 'REDIS_PASSWORD=svc_auth_pwd'
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+    networks:
+      - system_network
+
+  authentication-postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=authentication_db'
+      - 'POSTGRES_PASSWORD=svc_authentication_pwd'
+      - 'POSTGRES_USER=svc_authentication_user'
+    ports:
+      - '5432'
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "svc_authentication_user", "-d", "authentication_db", "-h", "localhost", "-p", "5432" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - postgres_data:/var/lib/postgresql/auth/data
+    networks:
+      - system_network
+
+  config-service:
+    build:
+      context: config-service
+      dockerfile: ./Dockerfile
+    ports:
+      - '8888'
+    healthcheck:
+      test: curl --fail http://config-service:8888/user-service/dev || exit 1
+      interval: 5s
+      timeout: 2s
+      retries: 3
+    networks:
+      - system_network
+
+  discovery-service:
+    build:
+      context: discovery-service
+      dockerfile: ./Dockerfile
+    ports:
+      - '8761:8761'
+    depends_on:
+      config-service:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail http://discovery-service:8761/eureka/v2/apps || exit 1
+      interval: 5s
+      timeout: 2s
+      retries: 3
+    networks:
+      - system_network
+
+  authentication-container:
+    build:
+      context: authentication-service
+      dockerfile: ./Dockerfile
+    ports:
+      - '8080'
+    depends_on:
+      config-service:
+        condition: service_healthy
+      discovery-service:
+        condition: service_healthy
+      authentication-postgres:
+        condition: service_healthy
+      redis-container:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail http://authentication-container:8080/actuator/health || exit 1
+      interval: 5s
+      timeout: 2s
+      retries: 3
+    networks:
+      - system_network
+
+  user-container:
+    build:
+      context: user-service
+      dockerfile: ./Dockerfile
+    ports:
+      - '8080'
+    depends_on:
+      config-service:
+        condition: service_healthy
+      discovery-service:
+        condition: service_healthy
+      user-postgres:
+        condition: service_healthy
+    networks:
+        - system_network
+
+  gateway-service:
+    build:
+      context: gateway-service
+      dockerfile: ./Dockerfile
+    ports:
+      - '8080:8080'
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      config-service:
+        condition: service_healthy
+      redis-container:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail http://gateway-service:8080/actuator/health || exit 1
+      interval: 5s
+      timeout: 2s
+      retries: 3
+    networks:
+      - system_network
+
+volumes:
+  postgres_data:
+
+networks:
+  system_network:
+    driver: bridge

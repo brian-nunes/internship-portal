@@ -1,0 +1,89 @@
+spring:
+  config:
+    import: optional:configserver:http://config-service:8888
+  application:
+    name: gateway-service
+  profiles:
+    active: dev
+  server:
+    port: 8080
+  output:
+    ansi:
+      enabled: always
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/user-service/**
+          filters:
+            - StripPrefix=1
+            - AuthFilterFactory
+        - id: professional-service
+          uri: lb://professional-service
+          predicates:
+            - Path=/professional-service/**
+          filters:
+            - StripPrefix=1
+            - AuthFilterFactory
+        - id: schedule-service
+          uri: lb://schedule-service
+          predicates:
+            - Path=/schedule-service/**
+          filters:
+            - StripPrefix=1
+            - AuthFilterFactory
+        - id: authentication-service
+          uri: lb://authentication-service
+          predicates:
+            - Path=/authentication-service/**
+          filters:
+            - StripPrefix=1
+        - id: config-server
+          uri: http://config-service:8888/
+          predicates:
+            - Path=/config-service/**
+          filters:
+            - StripPrefix=1
+        - id: openapi
+          uri: http://localhost:8080
+          predicates:
+            - Path=/v3/api-docs/**
+          filters:
+            - RewritePath=/v3/api-docs/?(?<segment>.*), /$\{segment}/v3/api-docs
+
+#- RewritePath=/user-service/?(?<segment>.*),/$\{segment\}
+
+# Actuator
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# Discovery Server
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-service:8761/eureka
+    registerWithEureka: true
+    fetchRegistry: true
+  instance:
+    preferIpAddress: true
+
+
+springdoc:
+  swagger-ui:
+    urls:
+      - name: user
+        url: /v3/api-docs/user-service
