@@ -5,6 +5,7 @@ import com.internship.portal.psychological.model.Medicine;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -22,6 +23,7 @@ public class MedicineDTO {
     private String name;
 
     @JsonProperty(value = "created_at")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date createdAt;
 
     @JsonProperty(value = "instructions")

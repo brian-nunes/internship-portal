@@ -18,8 +18,8 @@ public class SessionService {
     @Autowired
     private RedisService redisService;
 
-    public String createSession(String name, String documentNumber, String mail, String role) {
-        Session session = new Session(name, documentNumber, mail, role);
+    public String createSession(String name, String documentNumber, String mail) {
+        Session session = new Session(name, documentNumber, mail);
         log.info("Session built: [{}]", session);
         return redisService.setValue(session);
     }

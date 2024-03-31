@@ -5,6 +5,7 @@ import com.internship.portal.physical.activity.model.PhysicalActivity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -24,9 +25,11 @@ public class PhysicalActivityDTO {
     private String name;
 
     @JsonProperty(value = "created_at")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date createdAt;
 
     @JsonProperty(value = "goal_date")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date goalDate;
 
     @JsonProperty(value = "exercises")

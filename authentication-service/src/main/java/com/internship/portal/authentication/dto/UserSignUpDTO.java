@@ -25,7 +25,4 @@ public class UserSignUpDTO {
 
     @JsonProperty(value = "documentNumber", required = true)
     private String documentNumber;
-
-    @JsonProperty(value = "role", required = true)
-    private String role;
 }

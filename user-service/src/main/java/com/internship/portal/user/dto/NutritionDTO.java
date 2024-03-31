@@ -5,6 +5,7 @@ import com.internship.portal.user.model.Nutrition;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -19,6 +20,7 @@ public class NutritionDTO {
     private String idUser;
 
     @JsonProperty(value = "dh_registro")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date dhRegistro;
 
     @JsonProperty(value = "food", required = true)

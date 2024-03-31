@@ -1,0 +1,1916 @@
+{
+	"info": {
+		"_postman_id": "47c44021-d3d9-4e06-8485-fc78b5d7f1ef",
+		"name": "PlumaFit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17767468"
+	},
+	"item": [
+		{
+			"name": "authentication-service",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody = pm.response.json();",
+									"",
+									"var accessToken = responseBody.accessToken;",
+									"var sessionData = responseBody.sessionData;",
+									"",
+									"pm.environment.set(\"accessToken\", accessToken);",
+									"pm.environment.set(\"sessionData\", sessionData);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"\",\n    \"password\": \"\",\n    \"role\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/authentication-service/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"authentication-service",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"\",\n    \"password\": \"\",\n    \"mail\": \"\",\n    \"documentNumber\": \"\",\n    \"role\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/authentication-service/signup",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"authentication-service",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/authentication-service/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"authentication-service",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user-service",
+			"item": [
+				{
+					"name": "emotion-controller",
+					"item": [
+						{
+							"name": "Emotion",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id_user\": \"\",\n    \"dh_registro\": \"\",\n    \"status\": \"\",\n    \"observacao\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/user-service/emotion",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user-service",
+										"emotion"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Emotion",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 1,\n    \"id_user\": \"\",\n    \"dh_registro\": \"\",\n    \"status\": \"\",\n    \"observacao\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/user-service/emotion",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user-service",
+										"emotion"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Emotion",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/user-service/emotion?from=01-01-1970&to=31-12-2100",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user-service",
+										"emotion"
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "01-01-1970"
+										},
+										{
+											"key": "to",
+											"value": "31-12-2100"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Emotion Id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/user-service/emotion/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user-service",
+										"emotion",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "health-controller",
+					"item": [
+						{
+							"name": "Health",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id_user\": \"\",\n    \"dh_registro\": \"\",\n    \"weight\": \"\",\n    \"oxigen\": \"\",\n    \"blood_pressure\": \"\",\n    \"observacao\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/user-service/health",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user-service",
+										"health"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Health",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 1,\n    \"id_user\": \"\",\n    \"dh_registro\": \"\",\n    \"weight\": \"\",\n    \"oxigen\": \"\",\n    \"blood_pressure\": \"\",\n    \"observacao\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/user-service/health",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user-service",
+										"health"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Health",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/user-service/health?from=01-01-1970&to=31-12-2100",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user-service",
+										"health"
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "01-01-1970"
+										},
+										{
+											"key": "to",
+											"value": "31-12-2100"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Health Id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/user-service/health/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user-service",
+										"health",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "nutrition-controller",
+					"item": [
+						{
+							"name": "nutrition",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id_user\": \"\",\n    \"dh_registro\": \"\",\n    \"food\": \"\",\n    \"time\": \"\",\n    \"type\": \"\",\n    \"observacao\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/user-service/nutrition",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user-service",
+										"nutrition"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "nutrition",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 1,\n    \"id_user\": \"\",\n    \"dh_registro\": \"\",\n    \"food\": \"\",\n    \"time\": \"\",\n    \"type\": \"\",\n    \"observacao\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/user-service/nutrition",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user-service",
+										"nutrition"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "nutrition",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/user-service/nutrition?from=01-01-1970&to=31-12-2100",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user-service",
+										"nutrition"
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "01-01-1970"
+										},
+										{
+											"key": "to",
+											"value": "31-12-2100"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "nutrition Id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/user-service/nutrition/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user-service",
+										"nutrition",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "physical-activity-controller",
+					"item": [
+						{
+							"name": "physical-activity",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id_user\": \"\",\n    \"dh_registro\": \"\",\n    \"intensity\": \"\",\n    \"time\": \"\",\n    \"type\": \"\",\n    \"observacao\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/user-service/physical-activity",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user-service",
+										"physical-activity"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "physical-activity",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 1,\n    \"id_user\": \"\",\n    \"dh_registro\": \"\",\n    \"intensity\": \"\",\n    \"time\": \"\",\n    \"type\": \"\",\n    \"observacao\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/user-service/physical-activity",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user-service",
+										"physical-activity"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "physical-activity",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/user-service/physical-activity?from=01-01-1970&to=31-12-2100",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user-service",
+										"physical-activity"
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "01-01-1970"
+										},
+										{
+											"key": "to",
+											"value": "31-12-2100"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "physical-activity Id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/user-service/physical-activity/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user-service",
+										"physical-activity",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "schedule-service",
+			"item": [
+				{
+					"name": "Schedule Professional",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/schedule-service/schedule/professional/appointment?from=01-01-1970&to=31-12-2100",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"schedule-service",
+								"schedule",
+								"professional",
+								"appointment"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "01-01-1970"
+								},
+								{
+									"key": "to",
+									"value": "31-12-2100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Schedule Professional Block",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"time\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/schedule-service/schedule/professional/block",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"schedule-service",
+								"schedule",
+								"professional",
+								"block"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Schedule Professional Unblock",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"time\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/schedule-service/schedule/professional/unblock",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"schedule-service",
+								"schedule",
+								"professional",
+								"unblock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Schedule Professional Concealed",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/schedule-service/schedule/professional/1?from=01-01-1970&to=31-12-2100",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"schedule-service",
+								"schedule",
+								"professional",
+								"1"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "01-01-1970"
+								},
+								{
+									"key": "to",
+									"value": "31-12-2100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Schedule User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/schedule-service/schedule/patient/appointment?from=01-01-1970&to=31-12-2100",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"schedule-service",
+								"schedule",
+								"patient",
+								"appointment"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "01-01-1970"
+								},
+								{
+									"key": "to",
+									"value": "31-12-2100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Schedule",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_professional\": \"\",\n    \"time\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/schedule-service/schedule",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"schedule-service",
+								"schedule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Schedule Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/schedule-service/schedule/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"schedule-service",
+								"schedule",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Schedule Id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/schedule-service/schedule/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"schedule-service",
+								"schedule",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "professional-service",
+			"item": [
+				{
+					"name": "professional-controller",
+					"item": [
+						{
+							"name": "Edit Note",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id_user\": \"\",\n    \"nota\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/professional-service/note",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"professional-service",
+										"note"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Note",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id_user\": \"\",\n    \"nota\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/professional-service/note",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"professional-service",
+										"note"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Note",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id_user\": \"\",\n    \"id_professional\": \"\",\n    \"nota\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/professional-service/note?patientDocument=1234567",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"professional-service",
+										"note"
+									],
+									"query": [
+										{
+											"key": "patientDocument",
+											"value": "1234567"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "link-controller",
+					"item": [
+						{
+							"name": "Create Link",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id_user\": \"\",\n    \"nota\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/professional-service/link/92HT1R",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"professional-service",
+										"link",
+										"92HT1R"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Link",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id_user\": \"\",\n    \"nota\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/professional-service/link/2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"professional-service",
+										"link",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get User Links",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id_user\": \"\",\n    \"nota\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/professional-service/link/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"professional-service",
+										"link",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Professional Links",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id_user\": \"\",\n    \"nota\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/professional-service/link/professional",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"professional-service",
+										"link",
+										"professional"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Token",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{accessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "SessionData",
+										"value": "{{sessionData}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id_user\": \"\",\n    \"nota\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/professional-service/link/new-token",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"professional-service",
+										"link",
+										"new-token"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "psychological-service",
+			"item": [
+				{
+					"name": "Post Medicine",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_user\": \"\",\n    \"name\": \"\",\n    \"created_at\": \"\",\n    \"instructions\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/psychological-service/psychological",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"psychological-service",
+								"psychological"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Medicine",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"id_user\": \"\",\n    \"name\": \"\",\n    \"created_at\": \"\",\n    \"instructions\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/psychological-service/psychological",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"psychological-service",
+								"psychological"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Medicine By User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"id_user\": \"\",\n    \"name\": \"\",\n    \"created_at\": \"\",\n    \"instructions\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/psychological-service/psychological",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"psychological-service",
+								"psychological"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Medicine By Professional",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"id_user\": \"\",\n    \"name\": \"\",\n    \"created_at\": \"\",\n    \"instructions\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/psychological-service/psychological/123455",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"psychological-service",
+								"psychological",
+								"123455"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "physical-activity-service",
+			"item": [
+				{
+					"name": "Post PhysicalActivity",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_user\": \"\",\n    \"name\": \"\",\n    \"created_at\": \"\",\n    \"goal_date\": \"\",\n    \"exercises\": [\n        {\n            \"name\": \"\",\n            \"reps_min\": 1,\n            \"reps_max\": 10,\n            \"series\": 3,\n            \"observation\": \"\"\n        },\n                {\n            \"name\": \"\",\n            \"reps_min\": 1,\n            \"reps_max\": 10,\n            \"series\": 3,\n            \"observation\": \"\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/physical-activity-service/physical-activity",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"physical-activity-service",
+								"physical-activity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put PhysicalActivity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"id_user\": \"\",\n    \"name\": \"\",\n    \"created_at\": \"\",\n    \"goal_date\": \"\",\n    \"exercises\": [\n        {\n            \"name\": \"\",\n            \"reps_min\": 1,\n            \"reps_max\": 10,\n            \"series\": 3,\n            \"observation\": \"\"\n        },\n                {\n            \"name\": \"\",\n            \"reps_min\": 1,\n            \"reps_max\": 10,\n            \"series\": 3,\n            \"observation\": \"\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/physical-activity-service/physical-activity",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"physical-activity-service",
+								"physical-activity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get PhysicalActivity By User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"id_user\": \"\",\n    \"name\": \"\",\n    \"created_at\": \"\",\n    \"instructions\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/physical-activity-service/physical-activity",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"physical-activity-service",
+								"physical-activity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get PhysicalActivity By Professional",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"id_user\": \"\",\n    \"name\": \"\",\n    \"created_at\": \"\",\n    \"instructions\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/physical-activity-service/physical-activity/123455",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"physical-activity-service",
+								"physical-activity",
+								"123455"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "nutrition-service",
+			"item": [
+				{
+					"name": "Post Nutrition",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_user\": \"\",\n    \"name\": \"\",\n    \"description\": \"\",\n    \"start_date\": \"\",\n    \"end_date\": \"\",\n    \"meals\": [\n        {\n            \"name\": \"\",\n            \"foods\": [\n                {\n                    \"name\": \"\",\n                    \"quantity\": \"\"\n                },\n                {\n                    \"name\": \"\",\n                    \"quantity\": \"\"\n                }\n            ]\n        },\n                {\n            \"name\": \"\",\n            \"foods\": [\n                {\n                    \"name\": \"\",\n                    \"quantity\": \"\"\n                },\n                {\n                    \"name\": \"\",\n                    \"quantity\": \"\"\n                }\n            ]\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/nutrition-service/nutrition",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"nutrition-service",
+								"nutrition"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Nutrition",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"id_user\": \"\",\n    \"name\": \"\",\n    \"description\": \"\",\n    \"start_date\": \"\",\n    \"end_date\": \"\",\n    \"meals\": [\n        {\n            \"name\": \"\",\n            \"foods\": [\n                {\n                    \"name\": \"\",\n                    \"quantity\": \"\"\n                },\n                {\n                    \"name\": \"\",\n                    \"quantity\": \"\"\n                }\n            ]\n        },\n                {\n            \"name\": \"\",\n            \"foods\": [\n                {\n                    \"name\": \"\",\n                    \"quantity\": \"\"\n                },\n                {\n                    \"name\": \"\",\n                    \"quantity\": \"\"\n                }\n            ]\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/nutrition-service/nutrition",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"nutrition-service",
+								"nutrition"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get nutrition By User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"id_user\": \"\",\n    \"name\": \"\",\n    \"created_at\": \"\",\n    \"instructions\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/nutrition-service/nutrition",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"nutrition-service",
+								"nutrition"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get nutrition By Professional",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "SessionData",
+								"value": "{{sessionData}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"id_user\": \"\",\n    \"name\": \"\",\n    \"created_at\": \"\",\n    \"instructions\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/nutrition-service/nutrition/123455",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"nutrition-service",
+								"nutrition",
+								"123455"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "accessToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "sessionData",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

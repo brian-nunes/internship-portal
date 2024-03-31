@@ -5,6 +5,7 @@ import com.internship.portal.user.model.Emotion;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -15,10 +16,11 @@ public class EmotionDTO {
     @JsonProperty(value = "id")
     private Long id;
 
-    @JsonProperty(value = "id_user")
+    @JsonProperty(value = "id_user", required = true)
     private String idUser;
 
-    @JsonProperty(value = "dh_registro")
+    @JsonProperty(value = "dh_registro", required = true)
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date dhRegistro;
 
     @JsonProperty(value = "status", required = true)

@@ -5,6 +5,7 @@ import com.internship.portal.user.model.Health;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -19,6 +20,7 @@ public class HealthDTO {
     private String idUser;
 
     @JsonProperty(value = "dh_registro")
+    @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm")
     private Date dhRegistro;
 
     @JsonProperty(value = "weight")
@@ -27,7 +29,7 @@ public class HealthDTO {
     @JsonProperty(value = "oxigen")
     private String oxigen;
 
-    @JsonProperty(value = "blood_pressure")
+        @JsonProperty(value = "blood_pressure")
     private String bloodPressure;
 
     @JsonProperty(value = "observacao")

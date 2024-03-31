@@ -13,9 +13,9 @@ public class AuthService {
     @Autowired
     private JwtService jwtService;
 
-    public String generateSession(String name, String documentNumber, String mail, String role){
+    public String generateSession(String name, String documentNumber, String mail){
         log.info("Generating session for document [{}]", documentNumber);
-        String sessionHash = sessionService.createSession(name, documentNumber, mail, role);
+        String sessionHash = sessionService.createSession(name, documentNumber, mail);
         log.info("Session Hash Generated for Document [{}]: [{}]", documentNumber, sessionHash);
         return sessionHash;
     }

@@ -61,7 +61,6 @@ public class ScheduleController {
         return new ResponseEntity<>(appointments, HttpStatus.OK);
     }
 
-
     @PostMapping("/professional/block")
     public ResponseEntity<SuccessDTO> blockSchedule(@RequestHeader("SessionData") String sessionDataHeader, @RequestBody ScheduleBlockDTO scheduleBlockDTO) {
         Session session = sessionService.decodeSessionData(sessionDataHeader);

@@ -42,7 +42,7 @@ public class PhysicalActivity {
         this.createdAt = physicalActivityDTO.getCreatedAt();
         this.goalDate = physicalActivityDTO.getGoalDate();
         Set<Exercise> exerciseSet = new HashSet<>();
-        physicalActivityDTO.getExcercises().forEach(excerciseDTO -> exerciseSet.add(new Exercise(excerciseDTO)));
+        physicalActivityDTO.getExercises().forEach(excerciseDTO -> exerciseSet.add(new Exercise(excerciseDTO)));
         this.exercises = exerciseSet;
     }
 }

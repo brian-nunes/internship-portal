@@ -10,11 +10,10 @@ public class Session implements Serializable {
     private String name;
     private String documentNumber;
     private String mail;
-    private String role;
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, documentNumber, mail, role);
+        return Objects.hash(name, documentNumber, mail);
     }
 
     @Override
@@ -23,7 +22,6 @@ public class Session implements Serializable {
                 "name='" + name + '\'' +
                 ", documentNumber='" + documentNumber + '\'' +
                 ", mail='" + mail + '\'' +
-                ", role='" + role + '\'' +
                 '}';
     }
 }

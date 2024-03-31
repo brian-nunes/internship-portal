@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -29,9 +30,11 @@ public class NutritionDTO {
     private String description;
 
     @JsonProperty(value = "start_date")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date startDate;
 
     @JsonProperty(value = "end_date")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date endDate;
 
     @JsonProperty(value = "meals")

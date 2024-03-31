@@ -6,6 +6,7 @@ import com.internship.portal.user.model.PhysicalActivity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -20,6 +21,7 @@ public class PhysicalActivityDTO {
     private String idUser;
 
     @JsonProperty(value = "dh_registro")
+    @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm")
     private Date dhRegistro;
 
     @JsonProperty(value = "intensity", required = true)

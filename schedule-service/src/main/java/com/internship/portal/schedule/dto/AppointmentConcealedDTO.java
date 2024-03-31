@@ -5,6 +5,7 @@ import com.internship.portal.schedule.model.Appointment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -14,6 +15,7 @@ import java.util.Date;
 public class AppointmentConcealedDTO {
 
     @JsonProperty(value = "time")
+    @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm")
     private Date time;
 
     public AppointmentConcealedDTO(Appointment appointment) {

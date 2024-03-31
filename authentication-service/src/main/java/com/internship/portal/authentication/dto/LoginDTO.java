@@ -14,7 +14,4 @@ public class LoginDTO {
 
     @JsonProperty(value = "password", required = true)
     private String password;
-
-    @JsonProperty(value = "role", required = true)
-    private String role;
 }

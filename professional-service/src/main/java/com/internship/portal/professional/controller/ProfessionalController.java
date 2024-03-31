@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import com.internship.portal.professional.service.ProfessionalService;
 
 @RestController
-@RequestMapping("/professional")
+@RequestMapping("/note")
 public class ProfessionalController {
 
     @Autowired
@@ -20,8 +20,9 @@ public class ProfessionalController {
     private SessionService sessionService;
 
     @PostMapping
-    public ResponseEntity<SuccessDTO> postNote(@RequestBody NoteDTO noteDTO) {
-        professionalService.postNote(noteDTO);
+    public ResponseEntity<SuccessDTO> postNote(@RequestHeader("SessionData") String sessionDataHeader, @RequestBody NoteDTO noteDTO) {
+        String professionalDocument = sessionService.decodeSessionData(sessionDataHeader).getDocumentNumber();
+        professionalService.postNote(noteDTO, professionalDocument);
         return new ResponseEntity<>(SuccessDTO.builder().success(true).build(), HttpStatus.OK);
     }
 
@@ -32,8 +33,9 @@ public class ProfessionalController {
     }
 
     @PutMapping
-    public ResponseEntity<SuccessDTO> putNote(@RequestBody NoteDTO noteDTO) {
-        professionalService.putNote(noteDTO);
+    public ResponseEntity<SuccessDTO> putNote(@RequestHeader("SessionData") String sessionDataHeader, @RequestBody NoteDTO noteDTO) {
+        String professionalDocument = sessionService.decodeSessionData(sessionDataHeader).getDocumentNumber();
+        professionalService.putNote(noteDTO, professionalDocument);
         return new ResponseEntity<>(SuccessDTO.builder().success(true).build(), HttpStatus.OK);
     }
 }

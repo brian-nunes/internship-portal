@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -13,6 +14,7 @@ import java.util.Date;
 public class ScheduleBlockDTO {
 
     @JsonProperty(value = "time")
+    @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm")
     private Date time;
 
 }
