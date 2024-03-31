@@ -1,11 +1,11 @@
-package com.internship.portal.nutrition;
+package com.internship.portal.physical.activity;
 
-import com.internship.portal.nutrition.application.NutritionApplication;
+import com.internship.portal.physical.activity.application.PhysicalActivityApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(classes = NutritionApplication.class)
-class NutritionApplicationTests {
+@SpringBootTest(classes = PhysicalActivityApplication.class)
+class PhysicalActivityApplicationTests {
 
 	@Test
 	void contextLoads() {

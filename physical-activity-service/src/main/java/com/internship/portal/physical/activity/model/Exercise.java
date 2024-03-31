@@ -1,6 +1,6 @@
 package com.internship.portal.physical.activity.model;
 
-import com.internship.portal.physical.activity.dto.ExcerciseDTO;
+import com.internship.portal.physical.activity.dto.ExerciseDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,9 +9,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "excercise")
+@Table(name = "exercise")
 @NoArgsConstructor
-public class Excercise {
+public class Exercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,7 +34,12 @@ public class Excercise {
     @ManyToOne(fetch = FetchType.LAZY)
     private PhysicalActivity physicalActivity;
 
-    public Excercise(ExcerciseDTO excerciseDTO){
-
+    public Exercise(ExerciseDTO exerciseDTO){
+        this.id = exerciseDTO.getId();
+        this.name = exerciseDTO.getName();
+        this.repsMin = exerciseDTO.getRepsMin();
+        this.repsMax = exerciseDTO.getRepsMax();
+        this.series = exerciseDTO.getSeries();
+        this.observation = exerciseDTO.getObservation();
     }
 }

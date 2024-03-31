@@ -1,5 +1,6 @@
 package com.internship.portal.nutrition.model;
 
+import com.internship.portal.nutrition.dto.MealDTO;
 import com.internship.portal.nutrition.dto.NutritionDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,13 +8,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "appointment")
+@Table(name = "meal")
 @NoArgsConstructor
-public class Nutrition {
+public class Meal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,20 +24,17 @@ public class Nutrition {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description")
-    private String description;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Nutrition nutrition;
 
-    @Column(name = "start_date", nullable = false)
-    private Date start_date;
+    @OneToMany(mappedBy = "meal")
+    private Set<Food> foods;
 
-    @Column(name = "end_date", nullable = false)
-    private Date end_date;
-
-
-    public Nutrition(NutritionDTO nutritionDTO){
-        this.id = nutritionDTO.getId();
-        this.time = nutritionDTO.getTime();
-        this.idProfessional = nutritionDTO.getIdProfessional();
-        this.idUser = nutritionDTO.getIdUser();
+    public Meal(MealDTO mealDTO){
+        this.id = mealDTO.getId();
+        this.name = mealDTO.getName();
+        Set<Food> foodsSet = new HashSet<>();
+        mealDTO.getFoods().forEach(foodDTO -> foodsSet.add(new Food(foodDTO)));
+        this.foods = foodsSet;
     }
 }

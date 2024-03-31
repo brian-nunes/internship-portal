@@ -1,46 +1,52 @@
 package com.internship.portal.nutrition.model;
 
-import com.internship.portal.nutrition.dto.AppointmentDTO;
+import com.internship.portal.nutrition.dto.NutritionDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "appointment")
+@Table(name = "nutrition")
 @NoArgsConstructor
-public class Appointment {
+public class Nutrition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "id_professional", nullable = false)
-    private String idProfessional;
-
-    @Column(name = "id_user")
+    @Column(name = "id_user", nullable = false)
     private String idUser;
 
-    @Column(name = "time", nullable = false)
-    private Date time;
-    public Appointment(AppointmentDTO appointmentDTO){
-        this.id = appointmentDTO.getId();
-        this.time = appointmentDTO.getTime();
-        this.idProfessional = appointmentDTO.getIdProfessional();
-        this.idUser = appointmentDTO.getIdUser();
-    }
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    public Appointment(String idUser, String idProfessional, Date time){
-        this.time = time;
-        this.idProfessional = idProfessional;
-        this.idUser = idUser;
-    }
+    @Column(name = "description")
+    private String description;
 
-    public Appointment(String idProfessional, Date time){
-        this.time = time;
-        this.idProfessional = idProfessional;
+    @Column(name = "start_date", nullable = false)
+    private Date startDate;
+
+    @Column(name = "end_date", nullable = false)
+    private Date endDate;
+
+    @OneToMany(mappedBy = "nutrition")
+    private Set<Meal> meals;
+
+    public Nutrition(NutritionDTO nutritionDTO){
+        this.id = nutritionDTO.getId();
+        this.idUser = nutritionDTO.getIdUser();
+        this.name = nutritionDTO.getName();
+        this.description = nutritionDTO.getDescription();
+        this.startDate = nutritionDTO.getStartDate();
+        this.endDate = nutritionDTO.getEndDate();
+        Set<Meal> mealsSet = new HashSet<>();
+        nutritionDTO.getMeals().forEach(mealDTO -> mealsSet.add(new Meal(mealDTO)));
+        this.meals = mealsSet;
     }
 }

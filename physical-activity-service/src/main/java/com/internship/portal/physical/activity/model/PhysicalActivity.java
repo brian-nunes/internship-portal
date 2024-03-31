@@ -13,9 +13,9 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@Table(name = "nutrition")
+@Table(name = "physical_activity")
 @NoArgsConstructor
-public class Nutrition {
+public class PhysicalActivity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,27 +26,23 @@ public class Nutrition {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "created_at", nullable = false)
+    private Date createdAt;
 
-    @Column(name = "start_date", nullable = false)
-    private Date startDate;
+    @Column(name = "goal_date", nullable = false)
+    private Date goalDate;
 
-    @Column(name = "end_date", nullable = false)
-    private Date endDate;
+    @OneToMany(mappedBy = "physicalActivity")
+    private Set<Exercise> exercises;
 
-    @OneToMany(mappedBy = "nutrition")
-    private Set<Meal> meals;
-
-    public Nutrition(PhysicalActivityDTO physicalActivityDTO){
+    public PhysicalActivity(PhysicalActivityDTO physicalActivityDTO){
         this.id = physicalActivityDTO.getId();
         this.idUser = physicalActivityDTO.getIdUser();
         this.name = physicalActivityDTO.getName();
-        this.description = physicalActivityDTO.getDescription();
-        this.startDate = physicalActivityDTO.getStartDate();
-        this.endDate = physicalActivityDTO.getEndDate();
-        Set<Meal> mealsSet = new HashSet<>();
-        physicalActivityDTO.getMeals().forEach(mealDTO -> mealsSet.add(new Meal(mealDTO)));
-        this.meals = mealsSet;
+        this.createdAt = physicalActivityDTO.getCreatedAt();
+        this.goalDate = physicalActivityDTO.getGoalDate();
+        Set<Exercise> exerciseSet = new HashSet<>();
+        physicalActivityDTO.getExcercises().forEach(excerciseDTO -> exerciseSet.add(new Exercise(excerciseDTO)));
+        this.exercises = exerciseSet;
     }
 }

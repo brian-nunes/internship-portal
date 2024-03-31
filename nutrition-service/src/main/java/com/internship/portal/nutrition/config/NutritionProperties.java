@@ -1,4 +1,4 @@
-package com.internship.portal.schedule.config;
+package com.internship.portal.nutrition.config;
 
 import lombok.Getter;
 import org.springframework.cloud.context.config.annotation.RefreshScope;

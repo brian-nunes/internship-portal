@@ -1,6 +1,7 @@
 package com.internship.portal.professional.service;
 
 import com.internship.portal.microservices.commons.exception.BaseBusinessException;
+import com.internship.portal.professional.dto.LinkDTO;
 import com.internship.portal.professional.dto.TokenDTO;
 import com.internship.portal.professional.model.Link;
 import com.internship.portal.professional.model.Token;
@@ -11,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.Random;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -47,10 +48,27 @@ public class LinkService {
         return true;
     }
 
-    public boolean deleteLink(String userDocument, String professionalDocument){
-        Link link = linkRepository.findByIdProfessionalAndIdUser(professionalDocument, userDocument).orElseThrow(() -> new BaseBusinessException("LINK_NOT_FOUND", "User and professional arent linked", HttpStatus.FORBIDDEN));
+    public boolean deleteLink(String userDocument, Long linkId){
+        Link link = linkRepository.findById(linkId).orElseThrow(() -> new BaseBusinessException("LINK_NOT_FOUND", "No link found by given id", HttpStatus.FORBIDDEN));
+        if(!Objects.equals(link.getIdUser(), userDocument) && !Objects.equals(link.getIdProfessional(), userDocument)){
+            throw new BaseBusinessException("USER_NOT_RELATED_TO_LINK", "User not related to given link", HttpStatus.FORBIDDEN));
+        }
         linkRepository.delete(link);
         return true;
+    }
+
+    public List<LinkDTO> getUserLinks(String userDocument){
+        List<Link> linkList = linkRepository.findByIdUser(userDocument);
+        List<LinkDTO> linkDTOS = new ArrayList<>();
+        linkList.forEach(link -> linkDTOS.add(new LinkDTO(link)));
+        return linkDTOS;
+    }
+
+    public List<LinkDTO> getProfessionalLinks(String userDocument){
+        List<Link> linkList = linkRepository.findByIdProfessional(userDocument);
+        List<LinkDTO> linkDTOS = new ArrayList<>();
+        linkList.forEach(link -> linkDTOS.add(new LinkDTO(link)));
+        return linkDTOS;
     }
 
     private String generateToken(){

@@ -7,13 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class PhysicalActivityDTO {
+public class MedicineDTO {
     @JsonProperty(value = "id")
     private Long id;
 
@@ -26,20 +24,14 @@ public class PhysicalActivityDTO {
     @JsonProperty(value = "created_at")
     private Date createdAt;
 
-    @JsonProperty(value = "goal_date")
-    private Date goalDate;
+    @JsonProperty(value = "instructions")
+    private String instructions;
 
-    @JsonProperty(value = "exercises")
-    private Set<ExerciseDTO> exercises;
-
-    public PhysicalActivityDTO(Medicine medicine) {
+    public MedicineDTO(Medicine medicine) {
         this.id = medicine.getId();
         this.idUser = medicine.getIdUser();
         this.name = medicine.getName();
         this.createdAt = medicine.getCreatedAt();
-        this.goalDate = medicine.getGoalDate();
-        Set<ExerciseDTO> exercisesSet = new HashSet<>();
-        medicine.getExercises().forEach(exercises -> exercisesSet.add(new ExerciseDTO(exercises)));
-        this.exercises = exercisesSet;
+        this.instructions = medicine.getInstructions();
     }
 }

@@ -15,6 +15,9 @@
         <option value="$PROJECT_DIR$/schedule-service/pom.xml" />
         <option value="$PROJECT_DIR$/user-service/pom.xml" />
         <option value="$PROJECT_DIR$/professional-service/pom.xml" />
+        <option value="$PROJECT_DIR$/nutrition-service/pom.xml" />
+        <option value="$PROJECT_DIR$/physical-activity-service/pom.xml" />
+        <option value="$PROJECT_DIR$/psychological-service/pom.xml" />
       </list>
     </option>
   </component>

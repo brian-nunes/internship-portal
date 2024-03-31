@@ -1,4 +1,4 @@
-package com.internship.portal.physical.psychological.application;
+package com.internship.portal.psychological.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -12,12 +12,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableAutoConfiguration
 @EnableDiscoveryClient
 @ComponentScan("com.internship.portal")
-@EntityScan(basePackages = "com.internship.portal.physical.activity.model")
-@EnableJpaRepositories(basePackages = "com.internship.portal.physical.activity.repository")
-public class PhysicalActivityApplication {
+@EntityScan(basePackages = "com.internship.portal.psychological.model")
+@EnableJpaRepositories(basePackages = "com.internship.portal.psychological.repository")
+public class PsychologicalApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PhysicalActivityApplication.class, args);
+		SpringApplication.run(PsychologicalApplication.class, args);
 	}
 
 }

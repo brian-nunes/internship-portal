@@ -12,8 +12,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableAutoConfiguration
 @EnableDiscoveryClient
 @ComponentScan("com.internship.portal")
-@EntityScan(basePackages = "com.internship.portal.user.model")
-@EnableJpaRepositories(basePackages = "com.internship.portal.user.repository")
+@EntityScan(basePackages = "com.internship.portal.schedule.model")
+@EnableJpaRepositories(basePackages = "com.internship.portal.schedule.repository")
 public class ScheduleApplication {
 
 	public static void main(String[] args) {

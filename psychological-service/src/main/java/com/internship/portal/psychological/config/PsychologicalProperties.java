@@ -7,5 +7,5 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @RefreshScope
 @Getter
-public class PhysicalActivityProperties {
+public class PsychologicalProperties {
 }

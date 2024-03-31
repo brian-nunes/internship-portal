@@ -1,4 +1,4 @@
-package com.internship.portal.schedule.application;
+package com.internship.portal.nutrition.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -12,8 +12,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableAutoConfiguration
 @EnableDiscoveryClient
 @ComponentScan("com.internship.portal")
-@EntityScan(basePackages = "com.internship.portal.user.model")
-@EnableJpaRepositories(basePackages = "com.internship.portal.user.repository")
+@EntityScan(basePackages = "com.internship.portal.nutrition.model")
+@EnableJpaRepositories(basePackages = "com.internship.portal.nutrition.repository")
 public class NutritionApplication {
 
 	public static void main(String[] args) {

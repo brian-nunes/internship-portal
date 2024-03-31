@@ -1,42 +1,41 @@
 package com.internship.portal.psychological.service;
 
-import com.internship.portal.psychological.model.Exercise;
-import com.internship.portal.psychological.model.PhysicalActivity;
-import com.internship.portal.psychological.repository.PhysicalActivityRepository;
-import com.internship.portal.psychological.dto.PhysicalActivityDTO;
 import com.internship.portal.microservices.commons.exception.BaseBusinessException;
+import com.internship.portal.psychological.dto.MedicineDTO;
+import com.internship.portal.psychological.dto.MedicineListDTO;
+import com.internship.portal.psychological.model.Medicine;
+import com.internship.portal.psychological.repository.MedicineRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Slf4j
-public class PhysicalActivityService {
+public class PsychologicalService {
     @Autowired
-    private PhysicalActivityRepository physicalActivityRepository;
+    private MedicineRepository medicineRepository;
 
-    public PhysicalActivity postPhysicalActivity(PhysicalActivityDTO physicalActivityDTO){
-        return physicalActivityRepository.save(new PhysicalActivity(physicalActivityDTO));
+    public Medicine postMedicine(MedicineDTO medicineDTO){
+        return medicineRepository.save(new Medicine(medicineDTO));
     }
 
-    public PhysicalActivity putPhysicalActivity(PhysicalActivityDTO physicalActivityDTO){
-        PhysicalActivity physicalActivity = physicalActivityRepository.findById(physicalActivityDTO.getId()).orElseThrow(() -> new BaseBusinessException("PHYSICAL_ACTIVITY_NOT_FOUND", "No Physical Activity with given id", HttpStatus.FORBIDDEN));
-        physicalActivity.setName(physicalActivityDTO.getName());
-        physicalActivity.setIdUser(physicalActivityDTO.getIdUser());
-        physicalActivity.setCreatedAt(physicalActivityDTO.getCreatedAt());
-        physicalActivity.setGoalDate(physicalActivityDTO.getGoalDate());
-        Set<Exercise> exerciseSet = new HashSet<>();
-        physicalActivityDTO.getExcercises().forEach(exerciseDTO -> exerciseSet.add(new Exercise(exerciseDTO)));
-        physicalActivity.setExercises(exerciseSet);
-        return physicalActivityRepository.save(physicalActivity);
+    public Medicine putMedicine(MedicineDTO medicineDTO){
+        Medicine Medicine = medicineRepository.findById(medicineDTO.getId()).orElseThrow(() -> new BaseBusinessException("MEDICINE_NOT_FOUND", "No medicine with given id", HttpStatus.FORBIDDEN));
+        Medicine.setName(medicineDTO.getName());
+        Medicine.setIdUser(medicineDTO.getIdUser());
+        Medicine.setCreatedAt(medicineDTO.getCreatedAt());
+        Medicine.setInstructions(medicineDTO.getInstructions());
+        return medicineRepository.save(Medicine);
     }
 
-    public PhysicalActivityDTO getPhysicalActivity(String userDocument){
-        PhysicalActivity physicalActivity = physicalActivityRepository.findByIdUser(userDocument).orElseThrow(() -> new BaseBusinessException("NUTRITION_NOT_FOUND", "No physicalActivity with given document", HttpStatus.FORBIDDEN));
-        return new PhysicalActivityDTO(physicalActivity);
+    public MedicineListDTO getMedicineList(String userDocument){
+        List<Medicine> medicineList = medicineRepository.findByIdUser(userDocument);
+        List<MedicineDTO> medicineDTOS = new ArrayList<>();
+        medicineList.forEach(medicine -> medicineDTOS.add(new MedicineDTO(medicine)));
+        return MedicineListDTO.builder().medicineList(medicineDTOS).build();
     }
 }

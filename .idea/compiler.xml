@@ -9,10 +9,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="authentication-service" />
         <module name="config-service" />
+        <module name="psychological-service" />
         <module name="schedule-service" />
         <module name="gateway-service" />
         <module name="auth-commons" />
+        <module name="physical-activity-service" />
         <module name="microservices-commons" />
+        <module name="nutrition-service" />
         <module name="user-service" />
         <module name="discovery-service" />
         <module name="professional-service" />
@@ -35,7 +38,10 @@
       <module name="gateway-service" options="-parameters" />
       <module name="microservices-commons" options="-parameters" />
       <module name="microservives-commons" options="-parameters" />
+      <module name="nutrition-service" options="-parameters" />
+      <module name="physical-activity-service" options="-parameters" />
       <module name="professional-service" options="-parameters" />
+      <module name="psychological-service" options="-parameters" />
       <module name="schedule-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
       <module name="user-service (1)" options="-parameters" />

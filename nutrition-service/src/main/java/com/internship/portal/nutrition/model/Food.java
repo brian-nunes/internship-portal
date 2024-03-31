@@ -1,19 +1,18 @@
 package com.internship.portal.nutrition.model;
 
+import com.internship.portal.nutrition.dto.FoodDTO;
 import com.internship.portal.nutrition.dto.NutritionDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Entity
 @Getter
 @Setter
-@Table(name = "meal")
+@Table(name = "food")
 @NoArgsConstructor
-public class Meal {
+public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,10 +20,15 @@ public class Meal {
     @Column(name = "name", nullable = false)
     private String name;
 
-    public Meal(NutritionDTO nutritionDTO){
-        this.id = nutritionDTO.getId();
-        this.time = nutritionDTO.getTime();
-        this.idProfessional = nutritionDTO.getIdProfessional();
-        this.idUser = nutritionDTO.getIdUser();
+    @Column(name = "quantity", nullable = false)
+    private String quantity;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Meal meal;
+
+    public Food(FoodDTO foodDTO){
+        this.id = foodDTO.getId();
+        this.name = foodDTO.getName();
+        this.quantity = foodDTO.getQuantity();
     }
 }

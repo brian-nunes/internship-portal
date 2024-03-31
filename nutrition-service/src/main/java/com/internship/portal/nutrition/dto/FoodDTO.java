@@ -1,6 +1,7 @@
 package com.internship.portal.nutrition.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.internship.portal.nutrition.model.Food;
 import com.internship.portal.nutrition.model.Nutrition;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,24 +12,19 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-public class MealDTO {
+public class FoodDTO {
     @JsonProperty(value = "id")
     private Long id;
 
-    @JsonProperty(value = "id_user")
-    private String idUser;
+    @JsonProperty(value = "name")
+    private String name;
 
-    @JsonProperty(value = "id_professional")
-    private String idProfessional;
+    @JsonProperty(value = "quantity")
+    private String quantity;
 
-    @JsonProperty(value = "time")
-    private Date time;
-
-
-    public MealDTO(Nutrition appointment) {
-        this.time = appointment.getTime();
-        this.id = appointment.getId();
-        this.idUser = appointment.getIdUser();
-        this.idProfessional = appointment.getIdProfessional();
+    public FoodDTO(Food food) {
+        this.id = food.getId();
+        this.name = food.getName();
+        this.quantity = food.getQuantity();
     }
 }

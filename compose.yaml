@@ -30,6 +30,96 @@ services:
     networks:
       - system_network
 
+  nutrition-postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=nutrition_db'
+      - 'POSTGRES_PASSWORD=svc_nutrition_pwd'
+      - 'POSTGRES_USER=svc_nutrition_user'
+    ports:
+      - '5432'
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "svc_nutrition_user", "-d", "nutrition_db", "-h", "localhost", "-p", "5432" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - postgres_data:/var/lib/postgresql/nutrition/data
+    networks:
+      - system_network
+
+  professional-postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=professional_db'
+      - 'POSTGRES_PASSWORD=svc_professional_pwd'
+      - 'POSTGRES_USER=svc_professional_user'
+    ports:
+      - '5432'
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "svc_professional_user", "-d", "professional_db", "-h", "localhost", "-p", "5432" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - postgres_data:/var/lib/postgresql/professional/data
+    networks:
+      - system_network
+
+  schedule-postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=schedule_db'
+      - 'POSTGRES_PASSWORD=svc_schedule_pwd'
+      - 'POSTGRES_USER=svc_schedule_user'
+    ports:
+      - '5432'
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "svc_schedule_user", "-d", "schedule_db", "-h", "localhost", "-p", "5432" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - postgres_data:/var/lib/postgresql/schedule/data
+    networks:
+      - system_network
+
+  physical-activity-postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=physical_activity_db'
+      - 'POSTGRES_PASSWORD=svc_physical_activity_pwd'
+      - 'POSTGRES_USER=svc_physical_activity_user'
+    ports:
+      - '5432'
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "svc_physical_activity_user", "-d", "physical_activity_db", "-h", "localhost", "-p", "5432" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - postgres_data:/var/lib/postgresql/physical_activity/data
+    networks:
+      - system_network
+
+  psychological-postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=psychological_db'
+      - 'POSTGRES_PASSWORD=svc_psychological_pwd'
+      - 'POSTGRES_USER=svc_psychological_user'
+    ports:
+      - '5432'
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "svc_psychological_user", "-d", "psychological_db", "-h", "localhost", "-p", "5432" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - postgres_data:/var/lib/postgresql/psychological/data
+    networks:
+      - system_network
+
   redis-container:
     image: 'redis:latest'
     ports:
@@ -131,6 +221,86 @@ services:
         condition: service_healthy
     networks:
         - system_network
+
+  nutrition-container:
+    build:
+      context: nutrition-service
+      dockerfile: ./Dockerfile
+    ports:
+      - '8080'
+    depends_on:
+      config-service:
+        condition: service_healthy
+      discovery-service:
+        condition: service_healthy
+      nutrition-postgres:
+        condition: service_healthy
+    networks:
+      - system_network
+
+  physical-activity-container:
+    build:
+      context: physical-activity-service
+      dockerfile: ./Dockerfile
+    ports:
+      - '8080'
+    depends_on:
+      config-service:
+        condition: service_healthy
+      discovery-service:
+        condition: service_healthy
+      physical-activity-postgres:
+        condition: service_healthy
+    networks:
+      - system_network
+
+  professional-container:
+    build:
+      context: professional-service
+      dockerfile: ./Dockerfile
+    ports:
+      - '8080'
+    depends_on:
+      config-service:
+        condition: service_healthy
+      discovery-service:
+        condition: service_healthy
+      professional-postgres:
+        condition: service_healthy
+    networks:
+      - system_network
+
+  schedule-container:
+    build:
+      context: schedule-service
+      dockerfile: ./Dockerfile
+    ports:
+      - '8080'
+    depends_on:
+      config-service:
+        condition: service_healthy
+      discovery-service:
+        condition: service_healthy
+      schedule-postgres:
+        condition: service_healthy
+    networks:
+      - system_network
+
+  psychological-container:
+    build:
+      context: psychological-service
+      dockerfile: ./Dockerfile
+    ports:
+      - '8080'
+    depends_on:
+      config-service:
+        condition: service_healthy
+      discovery-service:
+        condition: service_healthy
+      psychological-postgres:
+        condition: service_healthy
+    networks:
+      - system_network
 
   gateway-service:
     build:

@@ -1,6 +1,7 @@
 package com.internship.portal.physical.activity.repository;
 
 import com.internship.portal.physical.activity.model.PhysicalActivity;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

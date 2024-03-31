@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.internship.portal</groupId>
-	<artifactId>physical-activity-service</artifactId>
+	<artifactId>psychological-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>physical-activity-service</name>
-	<description>Microservico de Atividade Fisica</description>
+	<name>psychological-service</name>
+	<description>Microservico de Psicologia</description>
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2023.0.0</spring-cloud.version>
@@ -86,7 +86,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>physical-activity-service</finalName>
+		<finalName>psychological-service</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

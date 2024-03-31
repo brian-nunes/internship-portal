@@ -1,6 +1,6 @@
-package com.internship.portal.schedule;
+package com.internship.portal.nutrition;
 
-import com.internship.portal.schedule.application.NutritionApplication;
+import com.internship.portal.nutrition.application.NutritionApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

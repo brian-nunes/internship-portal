@@ -37,6 +37,27 @@ spring:
           filters:
             - StripPrefix=1
             - AuthFilterFactory
+        - id: nutrition-service
+          uri: lb://nutrition-service
+          predicates:
+            - Path=/nutrition-service/**
+          filters:
+            - StripPrefix=1
+            - AuthFilterFactory
+        - id: psychological-service
+          uri: lb://psychological-service
+          predicates:
+            - Path=/psychological-service/**
+          filters:
+            - StripPrefix=1
+            - AuthFilterFactory
+        - id: physical-activity-service
+          uri: lb://physical-activity-service
+          predicates:
+            - Path=/physical-activity-service/**
+          filters:
+            - StripPrefix=1
+            - AuthFilterFactory
         - id: authentication-service
           uri: lb://authentication-service
           predicates:
@@ -85,5 +106,17 @@ eureka:
 springdoc:
   swagger-ui:
     urls:
-      - name: user
+      - name: user-service
         url: /v3/api-docs/user-service
+      - name: professional-service
+        url: /v3/api-docs/professional-service
+      - name: schedule-service
+        url: /v3/api-docs/schedule-service
+      - name: nutrition-service
+        url: /v3/api-docs/nutrition-service
+      - name: psychological-service
+        url: /v3/api-docs/psychological-service
+      - name: physical-activity-service
+        url: /v3/api-docs/physical-activity-service
+      - name: authentication-service
+        url: /v3/api-docs/authentication-service

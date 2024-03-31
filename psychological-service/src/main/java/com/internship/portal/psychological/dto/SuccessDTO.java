@@ -1,4 +1,4 @@
-package com.internship.portal.physical.psychological.dto;
+package com.internship.portal.psychological.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

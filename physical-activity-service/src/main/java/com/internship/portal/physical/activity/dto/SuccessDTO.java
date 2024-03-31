@@ -1,4 +1,4 @@
-package com.internship.portal.nutrition.dto;
+package com.internship.portal.physical.activity.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
