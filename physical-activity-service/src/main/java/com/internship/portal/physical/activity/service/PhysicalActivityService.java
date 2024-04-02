@@ -30,7 +30,7 @@ public class PhysicalActivityService {
         physicalActivity.setCreatedAt(physicalActivityDTO.getCreatedAt());
         physicalActivity.setGoalDate(physicalActivityDTO.getGoalDate());
         Set<Exercise> exerciseSet = new HashSet<>();
-        physicalActivityDTO.getExcercises().forEach(exerciseDTO -> exerciseSet.add(new Exercise(exerciseDTO)));
+        physicalActivityDTO.getExercises().forEach(exerciseDTO -> exerciseSet.add(new Exercise(exerciseDTO)));
         physicalActivity.setExercises(exerciseSet);
         return physicalActivityRepository.save(physicalActivity);
     }

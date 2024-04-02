@@ -4,7 +4,7 @@ FROM openjdk:17
 WORKDIR /app
 
 # Copiar o JAR da aplicação para o contêiner
-COPY ./target/user-service.jar app.jar
+COPY ./target/nutrition-service.jar app.jar
 
 # Expor a porta 8080 (ou a porta que sua aplicação Spring Boot está configurada para usar)
 EXPOSE 8080

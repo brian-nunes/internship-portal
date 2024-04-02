@@ -51,7 +51,7 @@ public class LinkService {
     public boolean deleteLink(String userDocument, Long linkId){
         Link link = linkRepository.findById(linkId).orElseThrow(() -> new BaseBusinessException("LINK_NOT_FOUND", "No link found by given id", HttpStatus.FORBIDDEN));
         if(!Objects.equals(link.getIdUser(), userDocument) && !Objects.equals(link.getIdProfessional(), userDocument)){
-            throw new BaseBusinessException("USER_NOT_RELATED_TO_LINK", "User not related to given link", HttpStatus.FORBIDDEN));
+            throw new BaseBusinessException("USER_NOT_RELATED_TO_LINK", "User not related to given link", HttpStatus.FORBIDDEN);
         }
         linkRepository.delete(link);
         return true;
