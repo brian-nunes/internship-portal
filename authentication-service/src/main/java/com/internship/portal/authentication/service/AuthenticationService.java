@@ -26,11 +26,11 @@ public class AuthenticationService {
     private AuthService authService;
 
     public LoginResponseDTO login(LoginDTO loginDTO){
-        User user = userRepository.findByUsername(loginDTO.getUsername()).orElse(null);
+        User user = userRepository.findByDocumentNumber(loginDTO.getDocumentNumber()).orElse(null);
         if (user == null) {
             throw new BaseBusinessException("ERROR_AUTHENTICATION_0001", "Usuário não encontrado", HttpStatus.FORBIDDEN);
         }
-        log.info("User [{}] found: [{}]", loginDTO.getUsername(), user);
+        log.info("User [{}] found: [{}]", loginDTO.getDocumentNumber(), user);
         if (!passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
             throw new BaseBusinessException("ERROR_AUTHENTICATION_0002", "Credenciais inválidas", HttpStatus.FORBIDDEN);
         }
@@ -51,6 +51,11 @@ public class AuthenticationService {
         log.info("Saving user: {} | hashed: {}", user.getUsername(), hashedPassword);
         userRepository.save(user);
         return user;
+    }
+
+    public UserSignUpDTO getUserInfo(String documentNumber){
+        User user = userRepository.findByDocumentNumber(documentNumber).orElseThrow(() -> new BaseBusinessException("ERROR_AUTHENTICATION_0001", "Usuário não encontrado", HttpStatus.FORBIDDEN));
+        return UserSignUpDTO.builder().mail(user.getMail()).documentNumber(user.getDocumentNumber()).username(user.getUsername()).build();
     }
 
     public void logout(String accessToken) {

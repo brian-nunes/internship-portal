@@ -9,8 +9,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class LoginDTO {
-    @JsonProperty(value = "username", required = true)
-    private String username;
+    @JsonProperty(value = "documentNumber", required = true)
+    private String documentNumber;
 
     @JsonProperty(value = "password", required = true)
     private String password;

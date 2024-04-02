@@ -33,4 +33,10 @@ public class AuthenticationController {
         User userSaved = authenticationService.signup(userSignUpDTO);
         return ResponseEntity.ok(userSaved);
     }
+
+    @GetMapping("/user-info")
+    public ResponseEntity<UserSignUpDTO> getUserInfo(@RequestParam String documentNumber) {
+        UserSignUpDTO userSignUpDTO = authenticationService.getUserInfo(documentNumber);
+        return ResponseEntity.ok(userSignUpDTO);
+    }
 }
