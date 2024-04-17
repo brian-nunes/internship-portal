@@ -30,6 +30,24 @@ services:
     networks:
       - system_network
 
+  ticket-postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=ticket_db'
+      - 'POSTGRES_PASSWORD=svc_ticket_pwd'
+      - 'POSTGRES_USER=svc_ticket_user'
+    ports:
+      - '5432'
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "svc_ticket_user", "-d", "ticket_db", "-h", "localhost", "-p", "5432" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - postgres_data:/var/lib/postgresql/ticket/data
+    networks:
+      - system_network
+
   nutrition-postgres:
     image: 'postgres:latest'
     environment:
@@ -221,6 +239,32 @@ services:
         condition: service_healthy
     networks:
         - system_network
+
+  ticket-container:
+    build:
+      context: ticket-service
+      dockerfile: ./Dockerfile
+    ports:
+      - '8080'
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+      ticket-postgres:
+        condition: service_healthy
+    networks:
+      - system_network
+
+  pucharse-container:
+    build:
+      context: pucharse-service
+      dockerfile: ./Dockerfile
+    ports:
+      - '8080'
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+    networks:
+      - system_network
 
   nutrition-container:
     build:

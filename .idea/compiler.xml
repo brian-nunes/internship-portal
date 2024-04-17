@@ -7,17 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="authentication-service" />
+        <module name="pucharse-service" />
         <module name="config-service" />
         <module name="psychological-service" />
+        <module name="auth-commons" />
+        <module name="user-service" />
+        <module name="discovery-service" />
+        <module name="ticket-service" />
+        <module name="authentication-service" />
         <module name="schedule-service" />
         <module name="gateway-service" />
-        <module name="auth-commons" />
         <module name="physical-activity-service" />
         <module name="microservices-commons" />
         <module name="nutrition-service" />
-        <module name="user-service" />
-        <module name="discovery-service" />
         <module name="professional-service" />
       </profile>
     </annotationProcessing>
@@ -42,7 +44,9 @@
       <module name="physical-activity-service" options="-parameters" />
       <module name="professional-service" options="-parameters" />
       <module name="psychological-service" options="-parameters" />
+      <module name="pucharse-service" options="-parameters" />
       <module name="schedule-service" options="-parameters" />
+      <module name="ticket-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
       <module name="user-service (1)" options="-parameters" />
       <module name="user-service (2)" options="-parameters" />

@@ -29,7 +29,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorDTO> handleUnknownException(final Exception exception, final HttpServletRequest request) {
         log.error("Erro: {}", exception.getMessage());
         ErrorDTO errorDTO = new ErrorDTO();
-        errorDTO.setError("ERROR_USER_0000");
+        errorDTO.setError("ERROR_GENERIC_0000");
         errorDTO.setMessage("Unexpected Error");
 
         return new ResponseEntity<>(errorDTO, HttpStatus.INTERNAL_SERVER_ERROR);

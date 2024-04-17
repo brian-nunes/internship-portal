@@ -13,7 +13,9 @@
     <file url="file://$PROJECT_DIR$/physical-activity-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/professional-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/psychological-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pucharse-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/schedule-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ticket-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/user-service/src/main/java" charset="UTF-8" />
   </component>
 </project>

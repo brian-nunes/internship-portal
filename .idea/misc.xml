@@ -18,6 +18,8 @@
         <option value="$PROJECT_DIR$/nutrition-service/pom.xml" />
         <option value="$PROJECT_DIR$/physical-activity-service/pom.xml" />
         <option value="$PROJECT_DIR$/psychological-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ticket-service/pom.xml" />
+        <option value="$PROJECT_DIR$/pucharse-service/pom.xml" />
       </list>
     </option>
   </component>

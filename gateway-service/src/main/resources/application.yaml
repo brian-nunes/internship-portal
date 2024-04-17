@@ -16,6 +16,18 @@ spring:
         locator:
           enabled: true
       routes:
+        - id: pucharse-service
+          uri: lb://pucharse-service
+          predicates:
+            - Path=/pucharse-service/**
+          filters:
+            - StripPrefix=1
+        - id: ticket-service
+          uri: lb://ticket-service
+          predicates:
+            - Path=/ticket-service/**
+          filters:
+            - StripPrefix=1
         - id: user-service
           uri: lb://user-service
           predicates:
@@ -107,7 +119,7 @@ springdoc:
   swagger-ui:
     urls:
       - name: user-service
-        url: /v3/api-docs/user-service
+        url: S
       - name: professional-service
         url: /v3/api-docs/professional-service
       - name: schedule-service
