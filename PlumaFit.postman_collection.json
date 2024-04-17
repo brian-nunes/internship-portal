@@ -34,7 +34,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"\",\n    \"password\": \"\",\n    \"role\": \"\"\n}",
+							"raw": "{\n    \"documentNumber\": \"22949837859\",\n    \"password\": \"1234\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -73,7 +73,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"\",\n    \"password\": \"\",\n    \"mail\": \"\",\n    \"documentNumber\": \"\",\n    \"role\": \"\"\n}",
+							"raw": "{\n    \"username\": \"brian\",\n    \"password\": \"1234\",\n    \"mail\": \"brian@mail\",\n    \"documentNumber\": \"22949837859\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -88,6 +88,48 @@
 							"path": [
 								"authentication-service",
 								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/authentication-service/user-info?documentNumber=22949837859",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"authentication-service",
+								"user-info"
+							],
+							"query": [
+								{
+									"key": "documentNumber",
+									"value": "22949837859"
+								}
 							]
 						}
 					},
@@ -1872,6 +1914,108 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "ticket-service",
+			"item": [
+				{
+					"name": "Post Ticket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"seat\": \"A1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/ticket-service/ticket",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ticket-service",
+								"ticket"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pucharse Ticket",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/ticket-service/ticket/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ticket-service",
+								"ticket",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tickets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/ticket-service/ticket",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ticket-service",
+								"ticket"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pucharse-service",
+			"item": [
+				{
+					"name": "Pucharse Ticket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"seat\": \"A1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/pucharse-service/pucharse/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pucharse-service",
+								"pucharse",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -1899,7 +2043,7 @@
 	"variable": [
 		{
 			"key": "url",
-			"value": "http://localhost:8080",
+			"value": "35.198.63.16",
 			"type": "string"
 		},
 		{
