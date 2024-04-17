@@ -1,5 +1,6 @@
 package com.internship.portal.ticket.service;
 
+import com.internship.portal.ticket.dto.MessageDTO;
 import com.internship.portal.ticket.dto.TicketDTO;
 import com.internship.portal.ticket.model.Ticket;
 import com.internship.portal.ticket.repository.TicketRepository;
@@ -7,6 +8,7 @@ import com.internship.portal.microservices.commons.exception.BaseBusinessExcepti
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -21,6 +23,9 @@ public class TicketService {
     @Autowired
     private TicketRepository ticketRepository;
 
+    @Autowired
+    private SimpMessagingTemplate messagingTemplate;
+
     public Ticket postTicket(TicketDTO ticketDTO){
         return ticketRepository.save(new Ticket(ticketDTO));
     }
@@ -31,6 +36,7 @@ public class TicketService {
             throw new BaseBusinessException("TICKET_ALREADY_BOUGHT", "Ticket ja comprado", HttpStatus.FORBIDDEN);
         }
         ticket.setPucharsed(true);
+        messagingTemplate.convertAndSend("/topic/messages", new MessageDTO(ticketId));
         return ticketRepository.save(ticket);
     }
 
